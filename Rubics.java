@@ -736,8 +736,8 @@ public class Rubics {
                 cube[17][2] = temp;
 
                 temp = cube[15][1];
-                cube[15][1] = cube[16][1];
-                cube[16][1] = temp;
+                cube[15][1] = cube[17][1];
+                cube[17][1] = temp;
 
                 temp = cube[15][2];
                 cube[15][2] = cube[17][0];
