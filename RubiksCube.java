@@ -70,7 +70,7 @@ public class RubiksCube extends JPanel implements ActionListener {
 
         // ===== U face (rows 0-2)
         if (gy == 1) {
-            row = 1 - gz;
+            row = 1 + gz;
             col = gx + 1;
             cubie.faceColors[4] = getColor(data[0 * 3 + row][col]);
         }
@@ -380,7 +380,8 @@ public void show(String[][] faceData) {
     // Always update colors (no new window)
     setCubeColors(faceData);
 }
-    public static void rotateFace(String[][] cube, String move) {
+        public static boolean rotateFace(String[][] cube, String move) {
+
 
         switch (move) {
             case "U":
@@ -419,7 +420,7 @@ public void show(String[][] faceData) {
                 cube[12][1] = temp1;
                 cube[12][2] = temp2;
                 
-                break;
+                return true;
             case "U'":
                 // Rotate the top face counter-clockwise
                 temp = cube[0][0];
@@ -455,7 +456,7 @@ public void show(String[][] faceData) {
                 cube[15][2] = temp2;
 
 
-                break;
+                return true;
             case "2U":
                 // Rotate the top face 180 degrees
                 temp = cube[0][0];
@@ -496,7 +497,7 @@ public void show(String[][] faceData) {
                 cube[15][2] = temp2;
 
 
-                break;
+                return true;
             case "D":
                 // Rotate the bottom face (yellow)
                 temp = cube[6][0];
@@ -531,7 +532,7 @@ public void show(String[][] faceData) {
                 cube[17][0] = temp;
                 cube[17][1] = temp1;
                 cube[17][2] = temp2;
-                break;
+                return true;
 
             case "D'":
                 // Rotate the bottom face counter-clockwise
@@ -567,7 +568,7 @@ public void show(String[][] faceData) {
                 cube[14][0] = temp;
                 cube[14][1] = temp1;
                 cube[14][2] = temp2;
-                break;
+                return true;
             case "2D":
                 // Rotate the bottom face 180 degrees
                 temp = cube[6][0];
@@ -606,7 +607,7 @@ public void show(String[][] faceData) {
                 cube[17][0] = temp;
                 cube[17][1] = temp1;
                 cube[17][2] = temp2;
-                break;
+                return true;
             case "R":
                 // Rotate the right face(blue) clockwise
                 temp = cube[3][0];
@@ -625,9 +626,9 @@ public void show(String[][] faceData) {
                 temp = cube[0][2];
                 temp1 = cube[1][2];
                 temp2 = cube[2][2];
-                cube[0][2] = cube[14][2];
+                cube[0][2] = cube[12][2];
                 cube[1][2] = cube[13][2];
-                cube[2][2] = cube[12][2];
+                cube[2][2] = cube[14][2];
 
                 cube[12][2] = cube[6][2];
                 cube[13][2] = cube[7][2];
@@ -641,7 +642,7 @@ public void show(String[][] faceData) {
                 cube[16][0] = temp1;
                 cube[17][0] = temp;
                 
-                break;
+                return true;
             case "R'":
                 // Rotate the right face counter-clockwise
                 temp = cube[3][0];
@@ -676,7 +677,7 @@ public void show(String[][] faceData) {
                 cube[13][2] = temp1;
                 cube[14][2] = temp2;
                 
-                break;
+                return true;
             case "2R":
                 // Rotate the right face 180 degrees
                 temp = cube[3][0];
@@ -716,7 +717,7 @@ public void show(String[][] faceData) {
                 cube[16][0] = temp1;
                 cube[17][0] = temp;
                 
-                break;
+                return true;
             case "L":
                 // Rotate the left face (green) clockwise
                 temp = cube[9][0];
@@ -750,7 +751,7 @@ public void show(String[][] faceData) {
                 cube[12][0] = temp;
                 cube[13][0] = temp1;
                 cube[14][0] = temp2;
-                break;
+                return true;
             case "L'":
                 // Rotate the left face counter-clockwise
                 temp = cube[9][0];
@@ -785,7 +786,7 @@ public void show(String[][] faceData) {
                 cube[16][2] = temp1;
                 cube[15][2] = temp2;
                 
-                break;
+                return true;
             case "2L":
                 // Rotate the left face 180 degrees
                 temp = cube[9][0];
@@ -825,7 +826,7 @@ public void show(String[][] faceData) {
                 cube[16][2] = temp1;
                 cube[17][2] = temp;
                 
-                break;
+                return true;
             case "F":
                 // Rotate the front face (red) clockwise
                 temp = cube[12][0];
@@ -845,22 +846,22 @@ public void show(String[][] faceData) {
                 temp1 = cube[4][0];
                 temp2 = cube[5][0];
 
-                cube[3][0] = cube[0][0];
-                cube[4][0] = cube[0][1];
-                cube[5][0] = cube[0][2];
+                cube[3][0] = cube[2][0];
+                cube[4][0] = cube[2][1];
+                cube[5][0] = cube[2][2];
 
-                cube[0][0] = cube[11][2];
-                cube[0][1] = cube[10][2];
-                cube[0][2] = cube[9][2];
+                cube[2][0] = cube[11][2];
+                cube[2][1] = cube[10][2];
+                cube[2][2] = cube[9][2];
 
-                cube[9][2] = cube[8][0];
-                cube[10][2] = cube[8][1];
-                cube[11][2] = cube[8][2];
+                cube[9][2] = cube[6][0];
+                cube[10][2] = cube[6][1];
+                cube[11][2] = cube[6][2];
 
-                cube[8][0] = temp2;
-                cube[8][1] = temp1;
-                cube[8][2] = temp;
-                break;
+                cube[6][0] = temp2;
+                cube[6][1] = temp1;
+                cube[6][2] = temp;
+                return true;
             case "F'":
                 // Rotate the front face counter-clockwise
                 temp = cube[12][0];
@@ -880,23 +881,23 @@ public void show(String[][] faceData) {
                 temp1 = cube[4][0];
                 temp2 = cube[5][0];
 
-                cube[3][0] = cube[8][2];
-                cube[4][0] = cube[8][1];
-                cube[5][0] = cube[8][0];
+                cube[3][0] = cube[6][2];
+                cube[4][0] = cube[6][1];
+                cube[5][0] = cube[6][0];
 
-                cube[8][0] = cube[9][2];
-                cube[8][1] = cube[10][2];
-                cube[8][2] = cube[11][2];
+                cube[6][0] = cube[9][2];
+                cube[6][1] = cube[10][2];
+                cube[6][2] = cube[11][2];
 
-                cube[9][2] = cube[0][2];
-                cube[10][2] = cube[0][1];
-                cube[11][2] = cube[0][0];
+                cube[9][2] = cube[2][2];
+                cube[10][2] = cube[2][1];
+                cube[11][2] = cube[2][0];
 
-                cube[0][0] = temp;
-                cube[0][1] = temp1;
-                cube[0][2] = temp2;
+                cube[2][0] = temp;
+                cube[2][1] = temp1;
+                cube[2][2] = temp2;
 
-                break;
+                return true;
             case "2F":
                 // Rotate the front face 180 degrees
                 temp = cube[12][0];
@@ -928,19 +929,19 @@ public void show(String[][] faceData) {
                 cube[10][2] = temp1;
                 cube[9][2] = temp2;
 
-                temp = cube[8][0];
-                temp1 = cube[8][1];
-                temp2 = cube[8][2];
+                temp = cube[6][0];
+                temp1 = cube[6][1];
+                temp2 = cube[6][2];
 
-                cube[8][0] = cube[0][0];
-                cube[8][1] = cube[0][1];
-                cube[8][2] = cube[0][2];
+                cube[6][2] = cube[2][0];
+                cube[6][1] = cube[2][1];
+                cube[6][0] = cube[2][2];
             
-                cube[0][0] = temp2;
-                cube[0][1] = temp1;
-                cube[0][2] = temp;
+                cube[2][0] = temp2;
+                cube[2][1] = temp1;
+                cube[2][2] = temp;
                 
-                break;
+                return true;
             case "B":
                 // Rotate the back face (orange) clockwise
                 temp = cube[15][0];
@@ -960,23 +961,23 @@ public void show(String[][] faceData) {
                 temp1 = cube[4][2];
                 temp2 = cube[5][2];
 
-                cube[3][2] = cube[6][2];
-                cube[4][2] = cube[6][1];
-                cube[5][2] = cube[6][0];
+                cube[3][2] = cube[8][2];
+                cube[4][2] = cube[8][1];
+                cube[5][2] = cube[8][0];
 
                 cube[8][0] = cube[9][0];
                 cube[8][1] = cube[10][0];
                 cube[8][2] = cube[11][0];
 
-                cube[9][0] = cube[2][2];
-                cube[10][0] = cube[2][1];
-                cube[11][0] = cube[2][0];
+                cube[9][0] = cube[0][2];
+                cube[10][0] = cube[0][1];
+                cube[11][0] = cube[0][0];
 
-                cube[2][0] = temp;
-                cube[2][1] = temp1;
-                cube[2][2] = temp2;
+                cube[0][0] = temp;
+                cube[0][1] = temp1;
+                cube[0][2] = temp2;
                 
-                break;
+                return true;
             case "B'":
                 // Rotate the back face counter-clockwise
                 temp = cube[15][0];
@@ -996,23 +997,23 @@ public void show(String[][] faceData) {
                 temp1 = cube[4][2];
                 temp2 = cube[5][2];
 
-                cube[3][2] = cube[2][0];
-                cube[4][2] = cube[2][1];
-                cube[5][2] = cube[2][2];
+                cube[3][2] = cube[0][0];
+                cube[4][2] = cube[0][1];
+                cube[5][2] = cube[0][2];
 
-                cube[2][0] = cube[11][0];
-                cube[2][1] = cube[10][0];
+                cube[0][0] = cube[11][0];
+                cube[0][1] = cube[10][0];
                 cube[0][2] = cube[9][0];
 
-                cube[9][0] = cube[6][0];
-                cube[10][0] = cube[6][1];
-                cube[11][0] = cube[6][2];
+                cube[9][0] = cube[8][0];
+                cube[10][0] = cube[8][1];
+                cube[11][0] = cube[8][2];
 
-                cube[6][0] = temp2;
-                cube[6][1] = temp1;
-                cube[6][2] = temp;
+                cube[8][0] = temp2;
+                cube[8][1] = temp1;
+                cube[8][2] = temp;
                 
-                break;
+                return true;
             case "2B":
                 // Rotate the back face 180 degrees
                 temp = cube[15][0];
@@ -1020,8 +1021,8 @@ public void show(String[][] faceData) {
                 cube[17][2] = temp;
 
                 temp = cube[15][1];
-                cube[15][1] = cube[16][1];
-                cube[16][1] = temp;
+                cube[15][1] = cube[17][1];
+                cube[17][1] = temp;
 
                 temp = cube[15][2];
                 cube[15][2] = cube[17][0];
@@ -1044,21 +1045,25 @@ public void show(String[][] faceData) {
                 cube[10][0] = temp1;
                 cube[9][0] = temp2;
 
-                temp = cube[2][0];
-                temp1 = cube[2][1];
-                temp2 = cube[2][2];
+                temp = cube[0][0];
+                temp1 = cube[0][1];
+                temp2 = cube[0][2];
 
-                cube[2][0] = cube[6][2];
-                cube[2][1] = cube[6][1];
-                cube[2][2] = cube[6][0];
+                cube[0][0] = cube[8][2];
+                cube[0][1] = cube[8][1];
+                cube[0][2] = cube[8][0];
 
-                cube[6][0] = temp2;
-                cube[6][1] = temp1;
-                cube[6][2] = temp;
-                break;
+                cube[8][0] = temp2;
+                cube[8][1] = temp1;
+                cube[8][2] = temp;
+                return true;
+            
+            //case "solve":
+                //printSolveSequence(history);
 
             default:
                 System.out.println("Invalid move: " + move);
+                return false;
         }
 
         

@@ -1,5 +1,3 @@
-package csciJava;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,6 +5,13 @@ import javax.swing.*;
 
 public class goframe {
     static String[][] board =  new String[9][9];
+
+    static boolean[][] lives = new boolean[9][9];
+    static boolean [][] territory = new boolean[9][9];
+    static boolean [][] beenChecked = new boolean[9][9];
+
+
+
     private static boolean blackTurn = true;
     private static final int GAP = 30;
     private static final int MARGIN = 10;

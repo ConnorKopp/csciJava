@@ -31,58 +31,62 @@ public class Rubics {
             {"O", "O", "O"},
             {"O", "O", "O"},
         };
-    ArrayList<String> history = new ArrayList<>();
 
 
+        ArrayList<String> history = new ArrayList<>();
 
-    boolean testMode = args.length > 0;
+        boolean testMode = args.length > 0;
 
-    if (testMode) {
-        // ===== TEST MODE =====
-        for (String move : args) {
-            move = move.toUpperCase();
-
-            if (rotateFace(cube, move)) {
-                history.add(move);
+        if (testMode) {
+            // ===== TEST MODE =====
+            for (String move : args) {
+                move = move.toUpperCase();
+                if (rotateFace(cube, move)) {
+                    history.add(move);
+                }
+                // invalid moves are ignored silently in test mode
             }
-            // invalid moves are ignored silently in test mode
+
+            printCube(cube);
+            return;
         }
 
-        printCube(cube);
-        return;
+        // ===== INTERACTIVE MODE =====
+            printCube(cube);
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                System.out.println("Enter a move (e.g., U, U', 2U, or solve): ");
+                String move = scanner.nextLine();
+                if (move.equals("solve")){
+                    printSolveSequence(history);
+                }
+                else if (rotateFace(cube, move.toUpperCase())){
+                    history.add(move.toUpperCase());
+                    printCube(cube);
+                }
+            }
     }
 
-    // ===== INTERACTIVE MODE =====
-        printCube(cube);
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Enter a move (e.g., U, U', 2U, or solve): ");
-            String move = scanner.nextLine();
-            if (move.equals("solve")){
-                printSolveSequence(history);
-            }
-            else if (rotateFace(cube, move.toUpperCase())){
-                history.add(move.toUpperCase());
-                printCube(cube);
-            }
-        }
-    }
 
 
     public static void printSolveSequence(ArrayList<String> history) {
         System.out.println("Solve sequence:");
-
         for (int i = history.size() - 1; i >= 0; i--) {
             System.out.print(reverseMove(history.get(i)) + " ");
         }
         System.out.println("\n");
     }
+
+
+
     public static String reverseMove(String move) {
         if (move.startsWith("2")) return move;   // 180° is its own inverse
         if (move.endsWith("'")) return move.substring(0, 1);
         return move + "'";
     }
+
+
+
     public static void printCube(String[][] cube) {
         for (int face = 0; face < 6; face++) {
             int start = face * 3;
@@ -97,6 +101,9 @@ public class Rubics {
             System.out.println();
         }
     }
+
+
+
     public static boolean rotateFace(String[][] cube, String move) {
         switch (move) {
             case "U":

@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class App {
     static String[][] checkCube =   {
@@ -56,18 +55,9 @@ public class App {
 
         RubiksCube Cube = new RubiksCube();
 
-        Scanner scn = new Scanner(System.in);
-
-        System.out.println("Would you like to see the solved cube (1) or checkered cube (2)? (1,2) ");
-        int ans = scn.nextInt();
         
-        
-        if(ans == 1)
-            Cube.show(cube);
-        else
-            Cube.show(checkCube);
+        Cube.show(cube);
 
-        scn.close();
 
     }
 }
