@@ -218,7 +218,9 @@ public class Go {
             } else {
                 System.out.println("White's turn");
             }
-            System.out.print("Enter row (0-8) or -1 to quit: ");
+            
+            System.out.println("Quiting the game will calculate territory and end the game. ");
+            System.out.println("Enter row (0-8) or -1 to quit: ");
 
             int row = scn.nextInt();
             if (row == -1) {
