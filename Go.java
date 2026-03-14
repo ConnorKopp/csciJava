@@ -15,14 +15,14 @@ public class Go {
     */
     static String[][] board = {
         {null, null, null, null, null, null, null, null, null},
-        {null, null, "@", "@", null, null, null, null, null},
-        {null, "@", "O", "O", "@", null, null, null, null},
-        {null, null, "@", "O", "O", "@", null, null, null},
-        {null, "@", "O", "O", "@", null, null, null, null},
-        {null, null, "@", "O", "@", null, null, null, null},
-        {null, null, "@", "O", "O", null, null, null, null},
-        {null, "@", "O", "O", "@", null, null ,null ,null},
-        {null ,null ,"@" ,"@" ,null ,null ,null ,null ,null}
+        {null, null, null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null ,null ,null},
+        {null, null, null, null, null, null, null ,null ,null},
+        {null ,null ,null ,null ,null ,null ,null ,null ,null}
     };
 
     static boolean[][] lives = new boolean[9][9];
